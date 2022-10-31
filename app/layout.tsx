@@ -21,7 +21,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         {children}
 
         <Image
-          className="fixed top-0 right-0 pointer-events-none"
+          className="fixed top-0 right-[-65%] md:right-0 pointer-events-none max-w-[1192px] max-h-[795px] md:max-w-[2385px] md:max-h-[1590px]"
           src="/code.svg"
           alt=""
           width={2385}
