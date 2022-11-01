@@ -1,41 +1,43 @@
-import Image from 'next/image'
-import { Download } from 'react-feather'
+import { Hero } from '@/components/Hero'
+import { RepositoryCard } from '@/components/RepositoryCard'
+import { ArrowRight } from 'react-feather'
+import { GH_REPOSITORIES_URL, REPOSITORIES } from './constants'
 
 export default function Home() {
   return (
-    <div className="bg-neutral-900 text-white h-screen w-screen py-12 px-6 md:px-12">
-      <div className="flex flex-col md:flex-row-reverse justify-center items-center gap-16">
-        <Image
-          className="rounded-full w-40 h-40 md:w-[250px] md:h-[250px]"
-          src="https://github.com/jonathanpauluze.png"
-          alt=""
-          width={250}
-          height={250}
-          quality={100}
-        />
+    <>
+      <Hero />
 
-        <div className="flex items-center md:items-start flex-col gap-8">
-          <div className="flex flex-col gap-2">
-            <h1 className="text-4xl md:text-5xl text-center md:text-left font-bold">
-              <span aria-hidden="true">&lt;</span>
-              Jonathan Pauluze
-              <span aria-hidden="true"> /&gt;</span>
-            </h1>
-            <span className="flex text-2xl md:text-3xl text-center md:text-left font-normal max-w-md">
-              Front-End Software Engineer based in Brazil
-            </span>
+      <div className="container mx-auto mt-32">
+        <h2 className="text-4xl font-bold">Recent projects</h2>
+
+        <div className="mt-6">
+          <div className="flex flex-col columns-3 md:flex-row gap-8">
+            {REPOSITORIES.map((repository) => (
+              <RepositoryCard
+                key={repository.id}
+                title={repository.title}
+                description={repository.description}
+                githubURL={repository.gh_url}
+                deployURL={repository.deploy_url}
+              />
+            ))}
           </div>
 
           <a
-            href="/jonathanpauluze_resume.pdf"
-            download
-            className="flex items-center px-3 gap-2 h-12 bg-stone-100 hover:bg-stone-300 transition-colors text-black font-semibold rounded-lg"
+            href={GH_REPOSITORIES_URL}
+            rel="noopener noreferrer"
+            target="_blank"
+            className="group mt-8 flex items-center gap-2 transition-transform"
           >
-            <Download />
-            Download resume
+            See more
+            <ArrowRight
+              size={16}
+              className="group-hover:translate-x-1 transition-transform "
+            />
           </a>
         </div>
       </div>
-    </div>
+    </>
   )
 }
